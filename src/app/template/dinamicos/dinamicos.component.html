@@ -1,1 +1,22 @@
-<p>dinamicos works!</p>
+<h2>Template: <small>Dínamicos</small></h2>
+<hr />
+
+<form (ngSubmit)="guardar()">
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input class="form-control" placeholder="Nombre de la persona" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button
+        type="button"
+        class="btn btn-primary float-end"
+        (click)="guardar()"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
