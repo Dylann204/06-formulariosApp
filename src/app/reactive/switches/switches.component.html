@@ -1,7 +1,7 @@
 <h2>Reactivos: Switches</h2>
 <hr />
 
-<form>
+<form [formGroup]="form" (ngSubmit)="guardar()">
   <!--Radio-->
   <div class="row mb-3">
     <label class="col-sm-3 col-form-label">Género</label>
@@ -10,8 +10,8 @@
         <input
           class="form-check-input"
           type="radio"
+          formControlName="genero"
           value="M"
-          name="radioGenero"
           id="radioMasculino"
         />
         <label class="form-check-label" for="radioMasculino"> Masculino </label>
@@ -20,8 +20,8 @@
         <input
           class="form-check-input"
           type="radio"
+          formControlName="genero"
           value="F"
-          name="radioGenero"
           id="radioFemenino"
         />
         <label class="form-check-label" for="radioFemenino"> Femenino </label>
@@ -37,6 +37,7 @@
         <input
           class="form-check-input"
           type="checkbox"
+          formControlName="notificaciones"
           role="switch"
           id="flexSwitchCheckChecked"
         />
@@ -52,7 +53,12 @@
     <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
+        <input
+          formControlName="condiciones"
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckDefault"
+        />
         <label class="form-check-label" for="flexCheckDefault">
           Terminos y condiciones de uso
         </label>
@@ -63,13 +69,13 @@
   <!--Botoin submit-->
   <div class="row">
     <div class="col">
-      <button class="btn btn-primary float-end" type="button">Guardar</button>
+      <button class="btn btn-primary float-end" type="submit">Guardar</button>
     </div>
   </div>
 </form>
 
-<!-- <h5>Valor del formuario</h5>
-<pre>{{ miFormulario.value | json }}</pre>
+<h5>Valor del formuario</h5>
+<pre>{{ form.value | json }}</pre>
 <br />
 
 <h5>Persona</h5>
@@ -77,10 +83,10 @@
 <br />
 
 <h5>Valid</h5>
-<pre>{{ miFormulario.valid }}</pre>
+<pre>{{ form.valid }}</pre>
 
-<h5>Terminos</h5>
-<pre>{{ miFormulario.controls?.['terminos']?.errors | json}}</pre>
+<!-- <h5>Terminos</h5>
+<pre>{{ form.controls?.['terminos']?.errors | json}}</pre>
 
 <br />
 <pre>Condiciones: </pre>
