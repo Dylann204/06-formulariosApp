@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailValidatorService } from 'src/app/shared/validator/email-validator.service';
 import { ValidatorService } from 'src/app/shared/validator/validator.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class RegistroComponent implements OnInit {
       email: [
         '',
         [Validators.required, Validators.pattern(this.vs.emailPattern)],
+        [this.ev],
       ],
       username: ['', [Validators.required, this.vs.Nstrider]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -30,13 +32,32 @@ export class RegistroComponent implements OnInit {
     }
   );
 
-  constructor(private fb: FormBuilder, private vs: ValidatorService) {}
+  get EmailErrorMsg(): string {
+    const errors = this.form.get('email')?.errors;
+    if (errors?.['required']) {
+      return 'Email es obligatorio';
+    } else if (errors?.['pattern']) {
+      return 'El valor ingresado no tiene formato de correo';
+    } else if (errors?.['emailTomado']) {
+      return 'El email ya fue tomado';
+    }
+
+    return '';
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private vs: ValidatorService,
+    private ev: EmailValidatorService
+  ) {}
 
   ngOnInit(): void {
     this.form.reset({
       nombre: 'Dylan Osorio',
       email: 'test1@test.com',
       username: 'dylan_osof04',
+      password: '123456',
+      password2: '123456',
     });
   }
 
